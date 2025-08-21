@@ -13,7 +13,9 @@ app.use(express.json());
 
 mongoose.connect("mongodb://localhost:27017/api")
     .then(() => console.log("MongoDB Conectado"))
-    .catch(err => console.log("Erro ao conectar MongoDB: ", err));
+    .catch(err => {
+        console.log("Erro ao conectar MongoDB: ", err);
+    });
 
     app.use("/api/user", router);
 
