@@ -25,11 +25,9 @@ export const registerUser = async (req, res) => {
         });
 
         await newUser.save();
-        console.log("Usuário registrado com sucesso:", newUser.email);
 
         res.status(201).json({ msg: "Novo usuário registrado" });
     } catch (err) {
-        console.error("Erro no registro:", err);
         res.status(500).json({ error: "Erro ao registrar usuário: " + err.message });
     }
 };
@@ -60,9 +58,6 @@ export const loginUser = async (req, res) => {
             process.env.TOKEN_SECRET || "secret_key",
             { expiresIn: "1h" }
         );
-        
-        console.log("Token gerado para usuário:", userExist._id);
-        console.log("Token gerado:", token);
 
         res.status(200).json({ 
             message: "Login realizado com sucesso", 
@@ -75,7 +70,6 @@ export const loginUser = async (req, res) => {
         });
 
     }catch(err){
-        console.error("Erro no login:", err);
         res.status(500).json({ error: "Erro ao realizar login" });
     }
 };

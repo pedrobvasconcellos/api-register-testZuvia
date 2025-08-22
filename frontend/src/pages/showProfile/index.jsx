@@ -15,15 +15,11 @@ function Profile() {
         }
 
         const token = localStorage.getItem("token");
-        console.log("Token no localStorage:", token);
         
         if (!token) {
             setErro("Token não encontrado no localStorage");
             return;
         }
-        
-        console.log("Fazendo requisição para /api/user/profile");
-        console.log("Headers da requisição:", { Authorization: `Bearer ${token}` });
         
         axios.get("/api/user/profile", {
             headers: { 
@@ -32,11 +28,9 @@ function Profile() {
             },
         })
         .then((res) => {
-            console.log("Resposta do perfil:", res.data);
             setUser(res.data);
         })
         .catch((err) => {
-            console.error("Erro na requisição do perfil:", err);
             setErro("Erro ao carregar perfil: " + (err.response?.data?.error || err.message));
         });
     }, [isAuthenticated]);

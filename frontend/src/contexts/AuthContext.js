@@ -17,13 +17,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log("Token carregado do localStorage:", token);
     
     if (token) {
       setIsAuthenticated(true);
-      console.log("Usuário autenticado via token");
     } else {
-      console.log("Nenhum token encontrado");
     }
     setLoading(false);
   }, []);
