@@ -60,8 +60,19 @@ export const loginUser = async (req, res) => {
             process.env.TOKEN_SECRET || "secret_key",
             { expiresIn: "1h" }
         );
+        
+        console.log("Token gerado para usuário:", userExist._id);
+        console.log("Token gerado:", token);
 
-        res.status(200).json({ message: "Login realizado com sucesso", token: token});
+        res.status(200).json({ 
+            message: "Login realizado com sucesso", 
+            token: token,
+            user: {
+                id: userExist._id,
+                nome: userExist.name,
+                email: userExist.email
+            }
+        });
 
     }catch(err){
         console.error("Erro no login:", err);
