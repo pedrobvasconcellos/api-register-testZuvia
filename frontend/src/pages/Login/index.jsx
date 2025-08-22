@@ -13,22 +13,15 @@ function Login(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            console.log("Tentando fazer login com:", { email, senha });
             const res = await axios.post("/api/user/login", { email, senha });
             const token = res.data.token;
 
-            console.log("Dados completos da resposta:", res.data);
             login(token, res.data.user);
             setMensagem("Login realizado com sucesso!");
-            console.log("Token recebido:", res.data.token);
-            console.log("Token salvo no localStorage:", localStorage.getItem("token"));
-            console.log("Dados do usuário:", res.data.user);
-            
             setTimeout(() => {
                 navigate('/profile');
             }, 1000);
         } catch (err){
-            console.error("Erro no login:", err);
             setMensagem("Erro ao logar: " + err.response?.data?.error || err.message);
         }
     };
